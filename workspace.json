@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "front": "apps/front",
+    "front-e2e": "apps/front-e2e",
+    "front-ui-shared": "libs/front/ui-shared",
+    "front-ui-shared-e2e": "apps/front-ui-shared-e2e",
+    "utils-storage": "libs/utils/storage"
+  }
+}
