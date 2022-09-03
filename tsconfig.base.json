@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": true,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -15,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@assets": ["./apps/front/src/assets"],
       "@azwaaji/front/ui-shared": ["libs/front/ui-shared/src/index.ts"],
       "@azwaaji/utils/storage": ["libs/utils/storage/src/index.ts"]
     }

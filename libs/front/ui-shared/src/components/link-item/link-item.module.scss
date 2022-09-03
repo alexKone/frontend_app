@@ -1,0 +1,26 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+.container {
+  border-radius: 32px;
+  padding: 16px;
+  margin: 8px 0;
+  transition: all .6s ease;
+  display: flex;
+
+  &:hover {
+    background-color: paleturquoise;
+  }
+
+  & > span {
+    margin-right: 8px;
+  }
+
+  & > h1::first-letter {
+    text-transform: uppercase;
+  }
+}

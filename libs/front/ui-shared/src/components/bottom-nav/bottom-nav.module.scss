@@ -1,0 +1,48 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // background-color: blue;
+  padding: 16px;
+  // background-color: var(--md-sys-color-primary-light);
+}
+.bottom-nav .label {
+  text-transform: capitalize;
+}
+.bottom-nav__item {
+  padding: 12px 8px 16px 8px;
+  // border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  // padding: 24px 0;
+  // margin: auto;
+}
+
+.bottom-nav__item > *:first-child {
+  color: var(--md-sys-color-on-primary-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@media screen and (min-width: 992px) {
+  .bottom-nav {
+    display: none;
+  }
+}

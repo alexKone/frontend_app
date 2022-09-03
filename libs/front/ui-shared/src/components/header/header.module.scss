@@ -1,0 +1,28 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 90px;
+  }
+}
+.avatar {
+  display: none;
+}
+
+
+@media (min-width: 992px) {
+  .container {justify-content: space-between}
+  .avatar {
+    display: block;
+    width: 40px;
+  }
+}

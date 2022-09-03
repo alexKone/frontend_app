@@ -1,0 +1,17 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+.sidenav {
+  display: none;
+  border: 1px solid black;
+}
+
+@media screen and (min-width: 992px) {
+  .sidenav {
+    display: block;
+  }
+}

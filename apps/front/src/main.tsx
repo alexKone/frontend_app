@@ -5,6 +5,7 @@ import client from './client';
 
 import App from './app/app';
 import reportWebVitals from './reportWebVitals';
+import AppProvider from 'libs/front/ui-shared/src/store/app-context/app-context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
-      <App />
+      <AppProvider>
+        <App />
+      </AppProvider>
     </ApolloProvider>
   </BrowserRouter>
 );

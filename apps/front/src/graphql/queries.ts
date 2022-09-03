@@ -1,6 +1,8 @@
-import { gql } from "@apollo/client";
+import {
+  gql
+} from "@apollo/client";
 
-export const ME = gql`
+export const ME = gql `
   query Me {
     me {
       id
@@ -16,7 +18,7 @@ export const ME = gql`
   }
 `;
 
-export const GET_PROFILES = gql`
+export const GET_PROFILES = gql `
   query GetProfiles($gender: String!) {
     profiles(filters: { gender: { ne: $gender } }) {
       data {
@@ -44,7 +46,7 @@ export const GET_PROFILES = gql`
   }
 `;
 
-export const GET_PROFILE = gql`
+export const GET_PROFILE = gql `
   query GetProfile($id: ID!) {
     profile(id: $id) {
       data {
@@ -88,6 +90,42 @@ export const GET_PROFILE = gql`
             data {
               attributes {
                 username
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_CONVERSATION_BY_PROFILE_ID = gql `
+  query GetConversationByProfileId($id: ID!) {
+    conversations(filters: { profiles: { id: { contains: $id } } }) {
+      data {
+        attributes {
+          profiles {
+            data {
+              id
+              attributes {
+                firstname
+                lastname
+                birthdate
+                user {
+                  data {
+                    attributes {
+                      username
+                    }
+                  }
+                }
+              }
+            }
+          }
+          messages {
+            data {
+              attributes {
+                content
+                status
               }
             }
           }

@@ -4,22 +4,18 @@ import { UseFormRegister } from "react-hook-form";
 
 /* eslint-disable-next-line */
 
-enum InputType {
-  textarea = 'textarea',
-  text = 'text',
-  email = 'email',
-  password = 'password',
-}
+// enum InputType {
+//   textarea = 'textarea',
+//   text = 'text',
+//   email = 'email',
+//   password = 'password',
+// }
 // export interface InputFormProps {
 //   type?: string;
 //   name: string;
 //   label: string;
 // }
-interface IFormValues {
-  "email": string;
-  "password": string;
-  // Age: number;
-}
+
 type InputProps = {
   label: string;
   register: UseFormRegister<any>;

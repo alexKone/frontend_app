@@ -4,17 +4,15 @@ import GoogleAuthCallback from '../components/GoogleAuthCallback';
 import AuthLayout from '../layouts/AuthLayout';
 import MainLayout from '../layouts/MainLayout';
 import Login from '../pages/auth/Login';
-import Favoris from '../pages/main/Favoris';
-import Homepage from '../pages/main/Homepage';
-import Messages from '../pages/main/Messages';
-import MyAccount from '../pages/main/MyAccount';
-import ProfileDetails from '../pages/main/ProfileDetails';
+import Favoris from '../pages/main/Favoris/Favoris';
+import Homepage from '../pages/main/Homepage/Homepage';
+import Messages from '../pages/main/Messages/Messages';
+import MyAccount from '../pages/main/MyAccount/MyAccount';
+import ProfileDetails from '../pages/main/ProfileDetails/ProfileDetails';
 import NotFound from '../pages/NotFound';
 // import styles from './app.module.scss';
 
 export function App() {
-
-  // console.log(process.env.NX_SERVER_URL)
 
   const mainRoutes = {
     path: '/',
