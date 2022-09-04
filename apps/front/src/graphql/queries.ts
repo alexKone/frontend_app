@@ -1,16 +1,25 @@
-import {
-  gql
-} from "@apollo/client";
+import { gql } from "@apollo/client";
 
-export const ME = gql `
-  query Me {
+export const CURRENT_USER = gql`
+  query CurrentUser {
     me {
       id
+      confirmed
+      username
       profile {
         data {
           attributes {
+            birthdate
             firstname
+            lastname
             gender
+            avatar {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
           }
         }
       }
@@ -46,7 +55,7 @@ export const GET_PROFILES = gql `
   }
 `;
 
-export const GET_PROFILE = gql `
+export const GET_PROFILE = gql`
   query GetProfile($id: ID!) {
     profile(id: $id) {
       data {
@@ -68,6 +77,15 @@ export const GET_PROFILE = gql `
                 language
                 profileSearching
                 sport
+              }
+            }
+          }
+          address {
+            data {
+              attributes {
+                street
+                city
+                country
               }
             }
           }

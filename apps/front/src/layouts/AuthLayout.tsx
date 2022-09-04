@@ -1,24 +1,14 @@
-import { Outlet } from "react-router-dom";
+import { AppContext } from "@azwaaji/front/ui-shared";
+import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 
 const AuthLayout = () => {
-  // const { isAuth, authenticate } = useAuth();
-
-  // const [getCurrentUser, { data }] = useLazyQuery(ME);
-
-  // console.log(isAuth);
-  // useEffect(() => {
-  //   if (localStorage.getItem(constants.token)) {
-  //     getCurrentUser()
-  //   }
-  // }, [getCurrentUser])
-
-
-  // useEffect(() => { if (data) authenticate() }, [data, authenticate])
+  const { isAuth, authenticate } = useContext(AppContext);
 
   return (
     <>
-      {/* {data && <Navigate to="/" />} */}
+      {isAuth && <Navigate to="/" />}
       <Outlet />
     </>
   )

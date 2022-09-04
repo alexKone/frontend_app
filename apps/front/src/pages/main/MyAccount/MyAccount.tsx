@@ -9,7 +9,14 @@ const MyAccount = () => {
 
 
   return (
-    <h3>mes MyAccount</h3>
+    <section>
+      <h3>Mon Compte</h3>
+      <div>
+        <p>confirmed: {currentUser?.id}</p>
+        <p>Gender: {currentUser?.profile.data.attributes.gender}</p>
+      </div>
+
+    </section>
   )
 };
 

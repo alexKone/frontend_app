@@ -41,3 +41,4 @@ Thumbs.db
 /.vscode
 /apps/front/src/constants.ts
 /apps/front/.env
+/apps/front/src/todo.md

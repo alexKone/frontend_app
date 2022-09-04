@@ -12,6 +12,7 @@ export * from './lib/form/input-form/input-form';
 export * from './lib/form/button-form/button-form';
 
 export * from './utils/formatString';
+export * from './utils/formatDate';
 
 export * from './hooks/use-fetch/useFetch';
 export * from './hooks/use-sidenav/use-sidenav';

@@ -10,7 +10,6 @@ import Messages from '../pages/main/Messages/Messages';
 import MyAccount from '../pages/main/MyAccount/MyAccount';
 import ProfileDetails from '../pages/main/ProfileDetails/ProfileDetails';
 import NotFound from '../pages/NotFound';
-// import styles from './app.module.scss';
 
 export function App() {
 

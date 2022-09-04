@@ -2,26 +2,19 @@ import { useQuery } from "@apollo/client";
 import { BottomNav, Loading, Header, LinkItem, NavItem, SidenavMobile, AppContext } from "@azwaaji/front/ui-shared";
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import constants from "../constants";
-import { ME } from "../graphql/queries";
+import { CURRENT_USER } from "../graphql/queries";
 
 const MainLayout = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { addUser } = useContext(AppContext);
 
-  const { data, loading, error } = useQuery(ME);
+  const { data, loading, error } = useQuery(CURRENT_USER);
 
   useEffect(() => {
-    if (!loading) setIsLoading(loading)
+    if (!loading) setIsLoading(loading);
     if (error) navigate('/auth/login');
-
-    if (data) {
-      addUser(data.me)
-      // addUser(data.me);
-      console.log('data =>', data);
-
-    }
+    if (data) addUser(data.me);
   }, [data, loading, error, navigate, addUser])
 
   return (

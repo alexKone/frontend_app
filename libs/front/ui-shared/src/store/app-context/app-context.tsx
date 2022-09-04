@@ -1,30 +1,21 @@
 import { createContext, useCallback, useState } from 'react';
-import styles from './app-context.module.scss';
+import { CurrentUserType, GetProfileType } from '../../../../../../apps/front/src/types';
 
 interface AppContextProps {
   isAuth: boolean;
-  currentUser: CurrentUserProps | null;
+  currentUser: CurrentUserType | null;
   authenticate: () => void;
   logout: () => void;
   addUser: (data: any) => void;
+  profile: GetProfileType | null;
+  addProfile: (profile: GetProfileType|null) => void | null;
 }
 interface AppProviderProps {
   children: React.ReactNode
 }
 
-interface CurrentUserProps {
-  id: string;
-  profile: {
-    data: {
-      attributes: {
-        firstname: string;
-        gender: string;
-      }
-    }
-  }
-}
-
 const defaultContext = {
+  profile: null,
   isAuth: false,
   currentUser: null,
   authenticate: () => {
@@ -35,16 +26,19 @@ const defaultContext = {
   },
   addUser: () => {
     return null;
-  }
+  },
+  addProfile: () => null
 }
 export const AppContext = createContext<AppContextProps>(defaultContext);
 
 const AppProvider = ({ children }: AppProviderProps) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null);
+  const [profile, setProfile] = useState<GetProfileType | null>(null);
+  const [currentUser, setCurrentUser] = useState<CurrentUserType | null>(null);
   const authenticate = useCallback(() => setIsAuth(true), []);
   const logout = useCallback(() => setIsAuth(false), []);
   const addUser = (user: any) => setCurrentUser(user);
+  const addProfile = (profile: any) => setProfile(profile);
 
   return (
     <AppContext.Provider value={{
@@ -52,7 +46,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
       currentUser,
       authenticate,
       logout,
-      addUser
+      addUser,
+      profile,
+      addProfile
     }}>
       {children}
     </AppContext.Provider>
