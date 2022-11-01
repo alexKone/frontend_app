@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/client";
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { BottomNav, Loading, Header, LinkItem, NavItem, SidenavMobile, AppContext } from "@azwaaji/front/ui-shared";
-import { ReactNode, useContext, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { CURRENT_USER } from "../graphql/queries";
 
-const MainLayout = () => {
+const MainLayout: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { addUser } = useContext(AppContext);
@@ -42,6 +43,9 @@ const MainLayout = () => {
               <Link to="/">
                 <LinkItem icon="notifications" label="notifications" />
               </Link>
+              <Link to="/checkout">
+                <LinkItem icon="notifications" label="checkout" />
+              </Link>
             </div>
             {/* <Sidenav /> */}
             <SidenavMobile />
@@ -73,10 +77,9 @@ export default MainLayout;
 interface ScrollToTopProps {
   children: ReactNode;
 }
-const ScrollToTop = (props: ScrollToTopProps) => {
+const ScrollToTop = (props: ScrollToTopProps): JSX.Element => {
   const location = useLocation();
   useEffect(() => window.scrollTo(0, 0), [location]);
 
-  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{props.children}</>;
 }

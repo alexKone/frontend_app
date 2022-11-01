@@ -146,3 +146,31 @@ export type GetProfileType = {
     };
   };
 };
+
+export interface IProducts {
+  datas?: IProductData[] | null;
+}
+export interface IProductData {
+  id: string;
+  object: string;
+  active: boolean;
+  attributes?: null[] | null;
+  created: number;
+  default_price?: null;
+  description?: string | null;
+  images?: (string | null)[] | null;
+  livemode: boolean;
+  metadata: Metadata;
+  name: string;
+  package_dimensions?: null;
+  shippable?: null;
+  statement_descriptor?: null;
+  tax_code?: null;
+  type: string;
+  unit_label?: null;
+  updated: number;
+  url?: null;
+}
+export interface Metadata {
+  eStore_prod_id?: string | null;
+}

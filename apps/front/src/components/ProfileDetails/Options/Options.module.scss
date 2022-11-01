@@ -1,0 +1,18 @@
+.container {
+  position: fixed;
+  width: 100%;
+  background: orangered;
+  display: flex;
+  justify-content: space-around;
+  bottom: 80px;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  color: #ffffff;
+
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

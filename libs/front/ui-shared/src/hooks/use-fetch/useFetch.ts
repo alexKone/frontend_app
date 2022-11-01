@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react'
 
 interface State<T> {
-  data?: T
+  data?: T|[]
   error?: Error
 }
 
@@ -13,7 +13,7 @@ type Action<T> =
   | { type: 'fetched'; payload: T }
   | { type: 'error'; payload: Error }
 
-function useFetch<T = unknown>(url?: string, options?: RequestInit): State<T> {
+function useFetch<T = unknown|[]|{}>(url?: string, options?: RequestInit): State<T> {
   const cache = useRef<Cache<T>>({})
 
   // Used to prevent state update if the component is unmounted

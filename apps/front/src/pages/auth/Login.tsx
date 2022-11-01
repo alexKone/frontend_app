@@ -3,7 +3,7 @@ import { AppContext, ButtonForm, InputForm, Loading, Toast } from '@azwaaji/fron
 import { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import constants from '../../constants';
 import { LOGIN } from '../../graphql/mutations';
 import { IFormValues } from '../../types';
@@ -86,8 +86,9 @@ const Login = () => {
               required
             />
             <ButtonForm label='login' type="submit" />
-        </form>
+          </form>
         </div>
+        <Link to='/auth/register'>Register</Link>
       </div>
     </div>
     </>
