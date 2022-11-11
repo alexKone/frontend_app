@@ -1,14 +1,24 @@
 import { gql } from '@apollo/client';
 
-export const CREATE_USER = gql`
-  mutation CreateUser($email: String!, $password: String!, $username: String, $birthdate: Date, $gender: String) {
+export const CREATE_USER = gql `
+  mutation CreateUser(
+    $username: String!,
+    $email: String!,
+    $password: String!,
+    $gender: String,
+    $birthdate: Date,
+    $firstname: String,
+    $lastname: String
+  ) {
     register(
       input: {
-        email: $email
-        password: $password
-        username: $username
-        birthdate: $birthdate
-        gender: $gender
+        username: $username,
+        email: $email,
+        password: $password,
+        gender: $gender,
+        birthdate: $birthdate,
+        firstname: $firstname,
+        lastname: $lastname
       }
     ) {
       jwt
@@ -31,7 +41,7 @@ export const CREATE_USER = gql`
   }
 `;
 
-export const LOGIN = gql`
+export const LOGIN = gql `
   mutation Login($email: String!, $password: String!) {
     login(input: { identifier: $email, password: $password }) {
       jwt
@@ -54,7 +64,7 @@ export const LOGIN = gql`
   }
 `;
 
-export const CREATE_MESSAGE = gql`
+export const CREATE_MESSAGE = gql `
   mutation CreateUser($content: String!, $conversationId: ID!, $profileId: ID!) {
     createMessage(data: { content: $content, conversation: $conversationId, profile: $profileId }) {
       data {

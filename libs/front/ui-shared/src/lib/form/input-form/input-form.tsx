@@ -1,5 +1,6 @@
 import styles from './input-form.module.scss';
 import { UseFormRegister } from "react-hook-form";
+import { slugify } from '../../../utils/stringify';
 
 
 /* eslint-disable-next-line */
@@ -25,6 +26,11 @@ type InputProps = {
 }
 
 export function InputForm({ label, register, required, type, name }: InputProps) {
+
+  console.log(slugify(label));
+
+
+
   // return (
   //   <div className={styles['container']}>
   //     <label htmlFor={`label-${props.label}`}>{props.label}</label>

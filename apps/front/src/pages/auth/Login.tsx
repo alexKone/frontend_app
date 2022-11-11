@@ -1,4 +1,4 @@
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { AppContext, ButtonForm, InputForm, Loading, Toast } from '@azwaaji/front/ui-shared';
 import { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
@@ -9,7 +9,7 @@ import { LOGIN } from '../../graphql/mutations';
 import { IFormValues } from '../../types';
 
 const Login = () => {
-  const { addUser, currentUser } = useContext(AppContext);
+  const { addUser } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
   const [loginUser, { data, loading, error }] = useMutation(LOGIN, {
