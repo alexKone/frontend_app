@@ -1,33 +1,62 @@
 import { useMutation } from "@apollo/client";
-import { ButtonForm, InputForm } from "@azwaaji/front/ui-shared"
+import { AppContext, ButtonForm, InputForm, Loading, Toast } from "@azwaaji/front/ui-shared"
 import { Helmet } from "react-helmet"
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { CREATE_USER } from '../../graphql/mutations';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './register.module.scss';
+import { useContext, useState } from "react";
+import {useEffect} from 'react';
+import constants from "../../constants";
+
+
+type Gender = 'male' | 'female'
 
 interface FormREegister {
   email: string;
   password: string;
   username: string;
   birthdate: string;
-  gender: string;
+  gender: Gender;
   firstname?: string;
   lastname?: string;
 }
 
-type Gender = 'male' | 'female'
 
 const Register = () => {
-  const [registerUser, { data, loading, error }] = useMutation(CREATE_USER, {
-    errorPolicy: 'all',
-  });
-  const { register, handleSubmit } = useForm<FormREegister>();
+  const [isError, setIsError] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
+
+
+  const { addUser, authenticate } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const [registerUser, { data, loading, error }] = useMutation(CREATE_USER, { errorPolicy: 'all' });
+  const { register, handleSubmit, formState } = useForm<FormREegister>();
+  const { isSubmitting } = formState
+
+  useEffect(() => {
+    if(data) {
+      if(data.register.jwt) {
+        localStorage.setItem(constants.token, data.register.jwt);
+        localStorage.setItem(
+          constants.current_user,
+          JSON.stringify({
+            id: data.register.user.id,
+            email: data.register.user.email,
+            username: data.register.user.username,
+            gender: data.register.user.profile.data.attributes.gender,
+          })
+        );
+        addUser(data.register.user)
+        authenticate()
+
+      }
+    }
+
+  }, [isSubmitting, data])
+
   const onSubmit: SubmitHandler<FormREegister> = (data) => {
-
-    console.log({data});
-
-
     registerUser({ variables: {
       username: data.username,
       email: data.email,
@@ -43,6 +72,17 @@ const Register = () => {
       <Helmet>
         <title>Register - Azwaaji</title>
       </Helmet>
+
+      {error && (
+        <Toast
+          text="Une erreur est survenue. Veuillez réessayer"
+          type="error"
+        />
+      )}
+
+      {/* <Loading /> */}
+
+      {/* {isSubmitting ? <Loading /> : ''} */}
       <div className="form">
         <div className="form__wrapper p-4">
           <form onSubmit={handleSubmit(onSubmit)}>

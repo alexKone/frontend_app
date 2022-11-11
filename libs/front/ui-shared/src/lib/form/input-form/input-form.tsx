@@ -26,25 +26,10 @@ type InputProps = {
 }
 
 export function InputForm({ label, register, required, type, name }: InputProps) {
-
-  console.log(slugify(label));
-
-
-
-  // return (
-  //   <div className={styles['container']}>
-  //     <label htmlFor={`label-${props.label}`}>{props.label}</label>
-  //     {props.type === 'textarea' ? (
-  //       <textarea name={props.name} id=""></textarea>
-  //     ) : (
-  //       <input type={props.type} name={props.name} />
-  //     )}
-  //   </div>
-  // );
   return (
     <div className={styles['container']}>
-      <label htmlFor={`label-${label}`}>{label}</label>
-      <input type={type} id={`label-${label}`} {...register(name, { required })} />
+      <label htmlFor={`label-${slugify(label)}`}>{label}</label>
+      <input type={type} id={`label-${slugify(label)}`} {...register(name, { required })} />
     </div>
   )
 }

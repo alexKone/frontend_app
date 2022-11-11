@@ -10,8 +10,8 @@ import { IFormValues } from '../../types';
 
 const Login = () => {
   const { addUser } = useContext(AppContext);
-  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
   const [loginUser, { data, loading, error }] = useMutation(LOGIN, {
     errorPolicy: 'all',
   });
