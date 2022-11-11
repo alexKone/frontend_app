@@ -1,4 +1,3 @@
-import { readSync } from "fs";
 import { useEffect, useState } from "react";
 
 const SuccessDisplay = ({ sessionId }: { sessionId: string }) => {

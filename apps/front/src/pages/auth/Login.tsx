@@ -23,10 +23,11 @@ const Login = () => {
     if (loading) setIsLoading(true);
     if (error) {
       setIsLoading(false);
-      setIsError('Il y a use erreur');
+      setIsError('Il y a une erreur');
     }
 
     if (data) {
+      console.log({data})
       setIsLoading(false);
 
       // add token and user infos in localstorage
