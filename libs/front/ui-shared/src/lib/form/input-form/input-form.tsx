@@ -17,19 +17,23 @@ import { slugify } from '../../../utils/stringify';
 //   label: string;
 // }
 
+type LabelPos = 'left' | 'right' | 'center'
+
 type InputProps = {
   label: string;
+  labelPos?: LabelPos;
+  placeholder?: string;
   register: UseFormRegister<any>;
   required: boolean;
   type: string;
   name: string;
 }
 
-export function InputForm({ label, register, required, type, name }: InputProps) {
+export function InputForm({ label, labelPos, placeholder, register, required, type, name }: InputProps) {
   return (
     <div className={styles['container']}>
-      <label htmlFor={`label-${slugify(label)}`}>{label}</label>
-      <input type={type} id={`label-${slugify(label)}`} {...register(name, { required })} />
+      <label className={styles[`label-${labelPos ?? 'left'}`]} htmlFor={`label-${slugify(label)}`}>{label}</label>
+      <input placeholder={placeholder ? placeholder : ''} type={type} id={`label-${slugify(label)}`} {...register(name, { required })} />
     </div>
   )
 }

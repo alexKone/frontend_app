@@ -5,6 +5,7 @@ import client from './client';
 import App from './app/app';
 import reportWebVitals from './reportWebVitals';
 import AppProvider from 'libs/front/ui-shared/src/store/app-context/app-context';
+import './styles.scss';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

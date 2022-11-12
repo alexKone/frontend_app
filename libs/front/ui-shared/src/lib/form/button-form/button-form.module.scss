@@ -2,13 +2,14 @@
   button {
     border-radius: 6px;
     background: none;
-    border: 1px solid black;
     padding: 8px 16px;
     width: 100%;
     text-transform: capitalize;
     cursor: pointer;
     transition: all .3s ease;
     margin: 24px 0px;
+    background-color: #4D3A85;
+    color: #ffffff;
 
     &:hover {
       background: red;

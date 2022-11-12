@@ -1,8 +1,8 @@
-import CheckoutForm from "apps/front/src/components/Checkout/CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
+import React from "react";
 
 const Checkout = () => {
   const stripePromise = loadStripe('pk_test_fvEJPPpkJtvEcu7sJAprgWL1');
@@ -22,9 +22,9 @@ const Checkout = () => {
       <Helmet>
       </Helmet>
       <div>
-        <Elements stripe={stripePromise}>
+        {/* <Elements stripe={stripePromise}>
           <CheckoutForm />
-        </Elements>
+        </Elements> */}
       </div>
     </>
   )

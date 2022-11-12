@@ -11,8 +11,18 @@ label {
 }
 input {
   width: 100%;
-  border: 1px solid black;
+  border: 1px solid rgba(0,0,0,0.4);
   // height: 40px;
   border-radius: 6px;
   padding: 8px 16px;
+}
+
+.label-left {
+  text-align: start;
+}
+.label-right {
+  text-align: end;
+}
+.label-center {
+  text-align: center;
 }

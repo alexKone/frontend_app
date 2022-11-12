@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 const Homepage = () => {
   const { currentUser, addUser } = useContext(AppContext);
   const { data, loading, error } = useQuery<ProfileListType>(GET_PROFILES, {
-    variables: { gender: currentUser?.profile.data.attributes.gender }
+    variables: { gender: JSON.parse(localStorage.getItem('currentUser') ?? '').gender }
   });
 
   if (loading) <Loading />
@@ -21,7 +21,42 @@ const Homepage = () => {
         <title>Homepage - Azwaaji app</title>
       </Helmet>
       <section className={styles['profile__list']}>
-        {data && data.profiles.data.map((p: ProfileListItemType, i: number) => (
+      <UserCard
+        username="samasa"
+        age={25}
+        city="Paris"
+        country="fr"
+        gender="male"
+      />
+      <UserCard
+        username="samasa"
+        age={25}
+        city="Paris"
+        country="fr"
+        gender="female"
+      />
+      <UserCard
+        username="samasa"
+        age={25}
+        city="Paris"
+        country="fr"
+        gender="male"
+      />
+      <UserCard
+        username="samasa"
+        age={25}
+        city="Paris"
+        country="fr"
+        gender="male"
+      />
+      <UserCard
+        username="samasa"
+        age={25}
+        city="Paris"
+        country="fr"
+        gender="male"
+      />
+        {/* {data && data.profiles.data.map((p: ProfileListItemType, i: number) => (
           <Fragment key={i}>
             <Link key={`a-${i}`} to={`/profiles/${p.id}`}>
               <UserCard
@@ -32,53 +67,8 @@ const Homepage = () => {
                 gender={p.attributes.gender}
               />
             </Link>
-            {/* <Link key={`b-${i}`} to={`/profiles/${p.id}`}>
-              <UserCard
-                username={p.attributes.user.data.attributes.username}
-                age={30}
-                city="Chilly Mazarin"
-                country="fr"
-                gender="male"
-              />
-            </Link>
-            <Link key={`c-${i}`} to={`/profiles/${p.id}`}>
-              <UserCard
-                username="abu issa"
-                age={30}
-                city="Chilly Mazarin"
-                country="fr"
-                gender="male"
-              />
-            </Link>
-            <Link key={`d-${i}`} to={`/profiles/${p.id}`}>
-              <UserCard
-                username={p.attributes.user.data.attributes.username}
-                age={30}
-                city="Chilly Mazarin"
-                country="fr"
-                gender="male"
-              />
-            </Link>
-            <Link key={`e-${i}`} to={`/profiles/${p.id}`}>
-              <UserCard
-                username="abu issa"
-                age={30}
-                city="Chilly Mazarin"
-                country="fr"
-                gender="male"
-              />
-            </Link>
-            <Link key={`f-${i}`} to={`/profiles/${p.id}`}>
-              <UserCard
-                username={p.attributes.user.data.attributes.username}
-                age={30}
-                city="Chilly Mazarin"
-                country="fr"
-                gender="male"
-              />
-            </Link> */}
           </Fragment>
-        ))}
+        ))} */}
       </section>
     </div>
   )

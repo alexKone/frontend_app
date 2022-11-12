@@ -1,5 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
 import constants from "./constants";
 
 const httpLink = createHttpLink({
@@ -16,9 +17,27 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+const errorLink = onError(({ graphQLErrors, networkError, response }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path}) => {
+      localStorage.removeItem(constants.token)
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    })
+  }
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+    if ('statusCode' in networkError && networkError.statusCode === 401) {
+      console.log('unauthorized, should redirect to login and remove localStore');
+
+    }
+  }
 })
+
+const client = new ApolloClient({
+  link: authLink.concat(errorLink.concat(httpLink)),
+  cache: new InMemoryCache(),
+});
 
 export default client;

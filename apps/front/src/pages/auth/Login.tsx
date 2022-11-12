@@ -10,7 +10,7 @@ import { IFormValues } from '../../types';
 
 const Login = () => {
   const { addUser } = useContext(AppContext);
-  const [isError, setIsError] = useState('');
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
   const [loginUser, { data, loading, error }] = useMutation(LOGIN, {
     errorPolicy: 'all',
@@ -23,7 +23,7 @@ const Login = () => {
     if (loading) setIsLoading(true);
     if (error) {
       setIsLoading(false);
-      setIsError('Il y a une erreur');
+      setIsError(true);
     }
 
     if (data) {
@@ -61,37 +61,43 @@ const Login = () => {
     <Helmet>
       <title>Login - Azwaaji</title>
     </Helmet>
-    <div className="">
-      {error && (
+      {isError ? (
         <Toast
           text="Une erreur est survenue. Veuillez réessayer"
           type="error"
         />
-      )}
+      ) : ''}
       {loading || (isLoading && <Loading />)}
-      <div className="form">
-        <div className="form__wrapper p-4">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <InputForm
-              type="email"
-              label="E-Mail"
-              name="email"
-              register={register}
-              required
-            />
-            <InputForm
-              type="password"
-              label="Mot de passe"
-              name="password"
-              register={register}
-              required
-            />
-            <ButtonForm label='login' type="submit" />
-          </form>
+      <div className="auth-content">
+        <div className="title">
+          <h2>connection</h2>
         </div>
-        <Link to='/auth/register'>Register</Link>
+
+        <div className="auth-content-form">
+          <div className="form__wrapper p-4">
+
+            {isError && <div>Une erreur est survenue. Veuillez réessayer</div>}
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <InputForm
+                type="email"
+                label="E-Mail"
+                name="email"
+                register={register}
+                required
+              />
+              <InputForm
+                type="password"
+                label="Mot de passe"
+                name="password"
+                register={register}
+                required
+              />
+              <ButtonForm label='login' type="submit" />
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
     </>
   );
 };

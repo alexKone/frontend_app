@@ -4,8 +4,7 @@ import { Helmet } from "react-helmet"
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { CREATE_USER } from '../../graphql/mutations';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './register.module.scss';
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import {useEffect} from 'react';
 import constants from "../../constants";
 
@@ -25,13 +24,12 @@ interface FormREegister {
 
 const Register = () => {
   const [isError, setIsError] = useState('');
-  const [isLoading, setIsLoading] = useState(false)
+  const [accept, setAccept] = useState(false)
 
 
   const { addUser, authenticate } = useContext(AppContext);
-  const navigate = useNavigate();
 
-  const [registerUser, { data, loading, error }] = useMutation(CREATE_USER, { errorPolicy: 'all' });
+  const [registerUser, { data, error }] = useMutation(CREATE_USER, { errorPolicy: 'all' });
   const { register, handleSubmit, formState } = useForm<FormREegister>();
   const { isSubmitting } = formState
 
@@ -50,13 +48,14 @@ const Register = () => {
         );
         addUser(data.register.user)
         authenticate()
-
       }
     }
 
-  }, [isSubmitting, data])
+  }, [isSubmitting, data, addUser, authenticate])
+
 
   const onSubmit: SubmitHandler<FormREegister> = (data) => {
+    if (!accept) setIsError('Il y a une erreur')
     registerUser({ variables: {
       username: data.username,
       email: data.email,
@@ -79,43 +78,47 @@ const Register = () => {
           type="error"
         />
       )}
-
-      {/* <Loading /> */}
-
-      {/* {isSubmitting ? <Loading /> : ''} */}
-      <div className="form">
+      <div className="auth-content">
+        <div className="title">
+          <h2>inscription</h2>
+        </div>
+      <div className="auth-content-form">
         <div className="form__wrapper p-4">
           <form onSubmit={handleSubmit(onSubmit)}>
           <InputForm
               type="text"
-              label="nom d'utilisateur"
+              label="Nom d'utilisateur"
+              labelPos="center"
+              placeholder="Prénom, kounia ou les 2"
               name="username"
               register={register}
               required
             />
 
-            <fieldset className={styles['field-radio']}>
-              <legend>je suis: </legend>
-              <div className={styles['field-radio__content']}>
+            <fieldset className="field-radio">
+              <legend>Je suis: </legend>
+              <div className="field-radio__content">
                 <input id="male" type="radio" value="male" {...register('gender')} defaultChecked/>
-                <label htmlFor="male">un homme</label>
+                <label htmlFor="male">Un homme</label>
               </div>
-              <div className={styles['field-radio__content']}>
+              <div className="field-radio__content">
                 <input id="female" type="radio" value="female" {...register('gender')} />
-                <label htmlFor="female">une femme</label>
+                <label htmlFor="female">Une femme</label>
               </div>
             </fieldset>
 
             <InputForm
               type="date"
-              label="date de naissance"
+              label="Date de naissance"
               name="birthdate"
               register={register}
               required
             />
             <InputForm
               type="email"
-              label="adresse email"
+              label="Adresse email"
+              labelPos="center"
+              placeholder="email@example.com"
               name="email"
               register={register}
               required
@@ -123,14 +126,20 @@ const Register = () => {
             <InputForm
               type="password"
               label="Mot de passe"
+              placeholder="******"
               name="password"
               register={register}
               required
             />
-            <ButtonForm label="register" type="submit" />
+            <div className="field-checkbox">
+              <input id="accept" type="checkbox" name="conditions" checked={accept} onChange={e => setAccept(e.target.checked)} />
+              <label className="sub-label__form" htmlFor="accept">Je confirme que j'ai plus de 10 ans et j'accepte les <Link className="link-static" to={'/'}>conditions d'utilisation</Link></label>
+            </div>
+            <ButtonForm label="valider" type="submit" />
           </form>
         </div>
-        <Link to="/auth/login">Login</Link>
+      </div>
+
       </div>
     </>
   )
