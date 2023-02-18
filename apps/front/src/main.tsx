@@ -1,10 +1,7 @@
-import { ApolloProvider } from '@apollo/client';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import client from './client';
 import App from './app/app';
 import reportWebVitals from './reportWebVitals';
-import AppProvider from 'libs/front/ui-shared/src/store/app-context/app-context';
 import './styles.scss';
 
 const root = ReactDOM.createRoot(
@@ -12,11 +9,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <BrowserRouter>
-    <ApolloProvider client={client}>
-      <AppProvider>
-        <App />
-      </AppProvider>
-    </ApolloProvider>
+    {/* <ApolloProvider client={client}> */}
+    {/* <AppProvider> */}
+    <App />
+    {/* </AppProvider> */}
+    {/* </ApolloProvider> */}
   </BrowserRouter>
 );
 

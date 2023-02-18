@@ -20,17 +20,17 @@ const authLink = setContext((_, { headers }) => {
 const errorLink = onError(({ graphQLErrors, networkError, response }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path}) => {
-      localStorage.removeItem(constants.token)
       console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}, Response: ${JSON.stringify(
+          response
+        )}`
+      );
     })
   }
   if (networkError) {
     console.log(`[Network error]: ${networkError}`);
     if ('statusCode' in networkError && networkError.statusCode === 401) {
       console.log('unauthorized, should redirect to login and remove localStore');
-
     }
   }
 })

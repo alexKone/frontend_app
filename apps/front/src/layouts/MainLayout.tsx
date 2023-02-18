@@ -1,26 +1,37 @@
-import { useQuery } from "@apollo/client";
+import { useQuery } from '@apollo/client';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { BottomNav, Loading, Header, LinkItem, NavItem, SidenavMobile, AppContext } from "@azwaaji/front/ui-shared";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { CURRENT_USER } from "../graphql/queries";
+import {
+  BottomNav,
+  Loading,
+  Header,
+  LinkItem,
+  NavItem,
+  SidenavMobile,
+  AppContext,
+} from '@azwaaji/front/ui-shared';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { CURRENT_USER } from '../graphql/queries';
 
 const MainLayout: React.FC = (): JSX.Element => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const { addUser } = useContext(AppContext);
+  // const { addUser } = useContext(AppContext);
 
-  const { data, loading, error } = useQuery(CURRENT_USER);
+  // const { data, loading, error } = useQuery(CURRENT_USER);
 
   useEffect(() => {
-    if (!loading) setIsLoading(loading);
-    if (error) navigate('/auth/login');
-    if (data) addUser(data.me);
-  }, [data, loading, error, navigate, addUser])
+    // if (!loading) setIsLoading(loading);
+    // if (error) navigate('/auth/login');
+    // if (data) addUser(data.me);
+  }, [navigate, location]);
 
   return (
     <ScrollToTop>
-      {isLoading ? <Loading /> : (
+      {isLoading ? (
+        <Loading />
+      ) : (
         <>
           <Header />
           <div className="wrapper">
@@ -38,7 +49,10 @@ const MainLayout: React.FC = (): JSX.Element => {
                 <LinkItem icon="filter_list" label="filtre de recherche" />
               </Link>
               <Link to="/">
-                <LinkItem icon="person_search" label="qui a consulté mon profil" />
+                <LinkItem
+                  icon="person_search"
+                  label="qui a consulté mon profil"
+                />
               </Link>
               <Link to="/">
                 <LinkItem icon="notifications" label="notifications" />
@@ -69,8 +83,8 @@ const MainLayout: React.FC = (): JSX.Element => {
         </>
       )}
     </ScrollToTop>
-  )
-}
+  );
+};
 
 export default MainLayout;
 
@@ -82,4 +96,4 @@ const ScrollToTop = (props: ScrollToTopProps): JSX.Element => {
   useEffect(() => window.scrollTo(0, 0), [location]);
 
   return <>{props.children}</>;
-}
+};

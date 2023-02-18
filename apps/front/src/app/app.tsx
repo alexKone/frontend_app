@@ -1,4 +1,4 @@
-import { Navigate, Routes, useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 import GoogleAuthCallback from '../components/GoogleAuthCallback';
 import AuthLayout from '../layouts/AuthLayout';
 import MainLayout from '../layouts/MainLayout';
@@ -17,7 +17,6 @@ import ProductDetails from '../pages/main/Products/ProductDetails';
 import Payment from '../pages/main/Payment';
 
 export function App() {
-
   const mainRoutes = {
     path: '/',
     element: <MainLayout />,
@@ -33,9 +32,9 @@ export function App() {
       { path: ROUTES.checkout, element: <Checkout /> },
       { path: ROUTES.payment, element: <Payment /> },
       { path: ROUTES.notFound, element: <NotFound /> },
-      { path: 'auth', element: <Navigate to='/login' /> },
-      { path: '*', element: <Navigate to='/404' /> },
-    ]
+      { path: 'auth', element: <Navigate to="/login" /> },
+      { path: '*', element: <Navigate to="/404" /> },
+    ],
   };
 
   const authRoutes = {
@@ -44,9 +43,9 @@ export function App() {
     children: [
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      { path: 'google/callback', element: <GoogleAuthCallback />},
-      { path: '*', element: <Navigate to='/404' />},
-    ]
+      { path: 'google/callback', element: <GoogleAuthCallback /> },
+      { path: '*', element: <Navigate to="/404" /> },
+    ],
   };
 
   return useRoutes([mainRoutes, authRoutes]);

@@ -10,10 +10,13 @@ import { Helmet } from 'react-helmet';
 const Homepage = () => {
   const { currentUser, addUser } = useContext(AppContext);
   const { data, loading, error } = useQuery<ProfileListType>(GET_PROFILES, {
-    variables: { gender: JSON.parse(localStorage.getItem('currentUser') ?? '').gender }
+    variables: { gender: 'female' }
   });
 
   if (loading) <Loading />
+
+  console.log({data});
+
 
   return (
     <div>
@@ -21,7 +24,7 @@ const Homepage = () => {
         <title>Homepage - Azwaaji app</title>
       </Helmet>
       <section className={styles['profile__list']}>
-      <UserCard
+      {/* <UserCard
         username="samasa"
         age={25}
         city="Paris"
@@ -55,8 +58,8 @@ const Homepage = () => {
         city="Paris"
         country="fr"
         gender="male"
-      />
-        {/* {data && data.profiles.data.map((p: ProfileListItemType, i: number) => (
+      /> */}
+        {data && data.profiles.data.map((p: ProfileListItemType, i: number) => (
           <Fragment key={i}>
             <Link key={`a-${i}`} to={`/profiles/${p.id}`}>
               <UserCard
@@ -68,7 +71,7 @@ const Homepage = () => {
               />
             </Link>
           </Fragment>
-        ))} */}
+        ))}
       </section>
     </div>
   )

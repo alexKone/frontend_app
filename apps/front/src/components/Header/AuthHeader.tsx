@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './auth-header.module.scss';
-import ROUTES from '../../routes';
 
 const AuthHeader = () => {
   const location = useLocation()
@@ -17,7 +16,11 @@ const AuthHeader = () => {
         <Link to="/">logo</Link>
       </div>
       <div>
-        { pageName ? <Link to="/auth/register">inscription</Link> : <Link to="/auth/login">connection</Link> }
+        { pageName ? (
+          <Link className={styles['auth-header__link']} to="/auth/register"><span className="material-symbols-outlined">login</span>inscription</Link>
+        ) : (
+          <Link className={styles['auth-header__link']} to="/auth/login"><span className="material-symbols-outlined">login</span>connection</Link>
+        ) }
       </div>
     </header>
   )
